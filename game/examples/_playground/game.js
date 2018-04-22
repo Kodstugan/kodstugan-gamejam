@@ -88,7 +88,6 @@ function update ()
 function Player(game, x, y) 
 {
     this.sprite = game.physics.add.sprite(x, y, 'player');
-    this.sprite.setBounce(0.1);
     this.sprite.setCollideWorldBounds(true);
 
     var shoot = game.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
@@ -96,7 +95,10 @@ function Player(game, x, y)
     var left = game.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
     var down = game.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     var right = game.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    
     var speed = 200;
+    this.sprite.setMaxVelocity(300, 600)
+    this.sprite.body.drag.x = 300;
 
     this.update = function()
     {
