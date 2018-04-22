@@ -1,7 +1,7 @@
 
 # Phaser Setup
 
-This guide will use Phaser 3, a popular and powerful game framework for making games on the web. A great benefit of doing gamedev on the web, and one of the primary reasons that we chose Phaser.js for this guide, is that it is very easy to make your game cross platform, which in turn makes it very easy to develop together with people on different operating systems and what not. Javascript is also an interpreted language, which means you don't have to do any fiddling with compilers or setting up complex IDE's in order to start developing.
+This guide will use Phaser 3, a popular and powerful game framework for making games on the web. A great benefit of doing gamedev on the web, and one of the primary reasons that we chose Phaser.js for this guide, is that it is very easy to make your game cross platform, which in turn makes it very easy to develop together with people on different operating systems. Javascript is also an interpreted language, which means you don't have to do any fiddling with compilers or setting up complex IDE's in order to start developing.
 
 ### Sounds great! What's the catch?
 
@@ -10,6 +10,7 @@ Well... web development can be somewhat tricky and javascript has its quirks, bu
 Now fret not, it sounds complicated and cumbersome, but it is super easy. If you have experience in this field you should probably do it your way, but if not, you can easily host a simple http server with Python. 
 
 If you have Python 3 installed, simply navigate to your working directory and then run:
+
 ```python -m "http.server"```
 
 And python will now serve locally at:
@@ -171,7 +172,6 @@ After you've declared the config object, add the following line:
 ``var game = new Phaser.Game(config);``
 
 In reality we could've just supplied all the config data to this constructor function directly, but that would've been a lot more fiddly and messy. It is a lot cleaner to keep the config as a separate object and then send the entirety of it to Phaser.
-
 
 
 Now we're done! If you start the http server in your working directory you should [see something like this](TODO)!
