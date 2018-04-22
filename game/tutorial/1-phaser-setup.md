@@ -91,13 +91,13 @@ var config = {
 ```
 
 Now let's go through this
+
 The ``type:`` property declares what rendering backend we will use, either standard html canvas or hardware accelerated WebGL. WebGL is faster even if we won't use any advanced 3d features, but not all browser support it yet. Since we don't know if the player's browser supports WebGL we will instead let Phaser choose, by assigning it ``Phaser.AUTO``, which is a constant declared by Phaser.
 
 ``width:`` and ``height`` just specify the dimensions of the window in pixels.
 ``parent:`` specifies the id of the element where we want Phaser to insert our game window, which we've set to the id of our game wrapper in ``index.html``
 
 ``physics:`` declares what physics engine we will use in our game. Phaser comes bundled with [4 different physics systems](https://phaser.io/docs/2.6.2/Phaser.Physics.html) each with their pros and cons, but we are not really interested in super realistic physics or advanced, and the Arcade system has very performant and "video-gamey" physics. We also declare an arcade physics config object where we specify the direction and strength of the gravity in the world, as well as a debug flag. Somewhat important to note is that "down" inside Phaser.js is towards the positive y axis, and up is negative. So the gravity of our game world will accelerate everything downwards 300 pixels each second.
-
 
 Finally we specify and declare the main scene object. You can think of a scene as a container that represent a part of the game, or as the world where out game objects live. Whenever we create object we want phaser to do stuff with, like drawing or physics calculations we will attach them to a scene and then tell phaser which scene to draw/update/calculate things in. A classic example is that you separate "screens" in different scenes, like the main menu, the game and the game over screen. So when you press play on the main menu we instantiate the game scene and when you lose the game we switch to the game over screen. Different levels or maps are also usually separated into different scenes.
 
@@ -135,7 +135,7 @@ Lastly we have ``update()``.
 ``update()`` is pretty much the core part of our game, this function will be called every frame, before Phaser draws everything to the screen. It is here that we want to check for player input, increment any timers, or update any states. All logic that constantly have to be checked in our scene have to live inside this function.
 
 
-### What about drawing?? and physics??? should we not have a render() and physicsUpdate() function too?
+#### What about drawing?? and physics??? should we not have a render() and physicsUpdate() function too?
 Well don't worry about that, Phaser is kind enough to handle that for us, literally behind the scenes. We simply just tell phaser that we want this object to have an image and Phaser will draw it for us. Same goes for physics. In fact, lets try drawing something!
 
 
