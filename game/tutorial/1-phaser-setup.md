@@ -1,7 +1,7 @@
 
 # Phaser Setup
 
-This guide will use Phaser 3, a popular and powerful game framework for making games on the web. A great benefit of doing gamedev on the web, and one of the primary reasons that we chose Phaser.js for this guide, is that it is very easy to make your game cross platform, which in turn makes it very easy to develop togheter with people on different operating systems and what not. Javascript is also an interpreted language, which means you dont have to do any fiddling with compilers or setting up complex IDE's in order to start developing.
+This guide will use Phaser 3, a popular and powerful game framework for making games on the web. A great benefit of doing gamedev on the web, and one of the primary reasons that we chose Phaser.js for this guide, is that it is very easy to make your game cross platform, which in turn makes it very easy to develop together with people on different operating systems and what not. Javascript is also an interpreted language, which means you don't have to do any fiddling with compilers or setting up complex IDE's in order to start developing.
 
 ### Sounds great! What's the catch?
 
@@ -10,7 +10,7 @@ Well... web development can be somewhat tricky and javascript has its quirks, bu
 Now fret not, it sounds complicated and cumbersome, but it is super easy. If you have experience in this field you should probably do it your way, but if not, you can easily host a simple http server with Python. 
 
 If you have Python 3 installed, simply navigate to your working directory and then run:
-```pyton -m "http.server"```
+```python -m "http.server"```
 
 And python will now serve locally at:
 http://localhost:8000
@@ -19,9 +19,9 @@ If you have Python 2 installed, you should really consider updating, otherwise u
 
 ```python -m SimpleHTTPServer```
 
-And if you dont have Python installed at all, what are you waiting for? If you plan to make a career in software development you will _probably_ write a python script at least once. Head on over and grab the latest version [here](https://www.python.org/downloads/)
+And if you don't have Python installed at all, what are you waiting for? If you plan to make a career in software development you will _probably_ write a python script at least once. Head on over and grab the latest version [here](https://www.python.org/downloads/)
 
-Now we can host stuff locally, but we dont have anything to host yet! So lets start setting up our web page!
+Now we can host stuff locally, but we don't have anything to host yet! So lets start setting up our web page!
 
 ## Getting started with the web page
 
@@ -54,7 +54,7 @@ Most tags in HTML, have an open ``<tag>`` and a closing ``</tag>`` marked with a
 
 The ``<head>`` tag contains the all the scripts we want to load and usually other meta stuff. In our case we just want to load phaser.js from the cdn that [jsdelivr](https://www.jsdelivr.com/) and [npm](https://www.npmjs.com/) kindly hosts for us, and then also load the game.js script locally where we will write our game. The text written inside of the ``<!-- -->`` are just comments.
 
-The ``<body>`` tag usually marks the actual main content on a website, but since our site is pretty simplistic it only conains a ``<h1>`` with the  a title, and a ``<div>`` tag that will eventually wrap the game viewport. ``<h1>`` tags are strictly used to mark "headings" on a webpage, like titles, but the ``<div>`` tag is somewhat more complicated to explain. Generally ``<div>``'s are used mostly like containers or "wrappers" to format and structure other tags, or when there is no other tag that fits the use case. We have given this div a name, or id, "game-viewport" because we can then easily tell Phaser.js where we want the game window, or _canvas_ to be inserted on the page by referring to the id.
+The ``<body>`` tag usually marks the actual main content on a website, but since our site is pretty simplistic it only contains a ``<h1>`` with the  a title, and a ``<div>`` tag that will eventually wrap the game viewport. ``<h1>`` tags are strictly used to mark "headings" on a webpage, like titles, but the ``<div>`` tag is somewhat more complicated to explain. Generally ``<div>``'s are used mostly like containers or "wrappers" to format and structure other tags, or when there is no other tag that fits the use case. We have given this div a name, or id, "game-viewport" because we can then easily tell Phaser.js where we want the game window, or _canvas_ to be inserted on the page by referring to the id.
 
 Feel free to change the titles or customize this page further, this guide wont do anything more with it. You can learn more about the different html tags and their different uses [here](http://www.simplehtmlguide.com/cheatsheet.php)
 
@@ -63,7 +63,7 @@ Feel free to change the titles or customize this page further, this guide wont d
 
 Phew, finally, we can get down to actually creating the game!
 
-Create a new file in your working directory, the same directoy where your index.html file is, and name it game.js. You can name it whatever you want actually, just make sure it ends with .js and that you load it in the script tag in index.html.
+Create a new file in your working directory, the same directory where your index.html file is, and name it game.js. You can name it whatever you want actually, just make sure it ends with .js and that you load it in the script tag in index.html.
 Now this file is where we will interact with Phaser.js and write all the logic for our game. Phaser is a very powerful framework, and you will find that Phaser can and will handle a lot of the more complex things for us, such as drawing our game to the screen as well as all the physics and collisions in our game. So the first thing we have to do is configure Phaser.js with our desired parameters regarding those things.
 
 We will be creating a config object that we can pass to phaser, wherein we have declared our parameters as properties of the object.
@@ -89,8 +89,8 @@ var config = {
 };
 ```
 
-Now lets go through this
-The ``type:`` property declares what rendering backend we will use, either standard html canvas or hardware accelerated WebGL. WebGL is faster even if we wont use any advanced 3d features, but not all browser support it yet. Since we dont know if the player's browser supports WebGL we will instead let Phaser choose, by assigning it ``Phaser.AUTO``, which is a constant declared by Phaser.
+Now let's go through this
+The ``type:`` property declares what rendering backend we will use, either standard html canvas or hardware accelerated WebGL. WebGL is faster even if we won't use any advanced 3d features, but not all browser support it yet. Since we don't know if the player's browser supports WebGL we will instead let Phaser choose, by assigning it ``Phaser.AUTO``, which is a constant declared by Phaser.
 
 ``width:`` and ``height`` just specify the dimensions of the window in pixels.
 ``parent:`` specifies the id of the element where we want Phaser to insert our game window, which we've set to the id of our game wrapper in ``index.html``
@@ -102,10 +102,10 @@ Finally we specify and declare the main scene object. You can think of a scene a
 
 Right now we only have on scene, but we will create many more later. That said, we want to do stuff in our scene too, like creating our game objects or updating them with our logic each frame, and thus we have to tell phaser which of our functions to call at different stages in the games life cycle.
 
-We will declare three properties that Phaser knows what to do with, ``preload:``, ``create`` and ``update``, and we will assign them three functions that we will logically call ``preload``, ``create`` and ``update``.
-Phaser expects to recieve a scene object with preload, create and update properties and thus know what to do with them. In fact, Phaser will look for and call a lot of other property functions in our scene object if we supply them, like ``render:`` that gets called after Phaser is done drawing each frame, in case we want to draw other things manually. However, we are content with the just the three we have.
+We will declare three properties that Phaser knows what to do with, ``preload:``, ``create:`` and ``update:``, and we will assign them three functions that we will logically call ``preload``, ``create`` and ``update``.
+Phaser expects to receive a scene object with preload, create and update properties and thus know what to do with them. In fact, Phaser will look for and call a lot of other property functions in our scene object if we supply them, like ``render:`` that gets called after Phaser is done drawing each frame, in case we want to draw other things manually. However, we are content with the just the three we have.
 
-Now lets declare these functions and we'll go through and explain their purpose.
+Now let's declare these functions and we'll go through and explain their purpose.
 
 ```
 function preload(){
@@ -125,7 +125,7 @@ function update(){
 ```
 
 First up is ``preload()``
-Since we assigned the ``preload:`` property of our scene object with the ``preload()`` function, Phaser will call it as soon as the game loads. It is in this function that we will load any assets wether it be images or sounds into the memory of our browser. It is important that we load everything before the game starts, or the game might stall or things might pop in randomly when running the game since it needs to stop and load stuff into memory.
+Since we assigned the ``preload:`` property of our scene object with the ``preload()`` function, Phaser will call it as soon as the game loads. It is in this function that we will load any assets whether it be images or sounds into the memory of our browser. It is important that we load everything before the game starts, or the game might stall or things might pop in randomly when running the game since it needs to stop and load stuff into memory.
 
 Then we have the ``create()`` function.
 ``create()`` will be called after ``preload()`` but before the main loop of updating and drawing start. It is here where we will create and initialize our game objects, like creating the player, placing all the obstacles on the map, spawning all the enemies and resetting the score. The games starting state will be defined by this function.
@@ -134,11 +134,11 @@ Lastly we have ``update()``.
 ``update()`` is pretty much the core part of our game, this function will be called every frame, before Phaser draws everything to the screen. It is here that we want to check for player input, increment any timers, or update any states. All logic that constantly have to be checked in our scene have to live inside this function.
 
 
-### What about drawing?? and physics??? shold we not have a render() and physicsUpdate() function too?
-Well dont worry about that, Phaser is kind enough to handle that for us, litterally behind the scenes. We simply just tell phaser that we want this object to have an image and Phaser will draw it for us. Same goes for physics. In fact, lets try drawing something!
+### What about drawing?? and physics??? should we not have a render() and physicsUpdate() function too?
+Well don't worry about that, Phaser is kind enough to handle that for us, literally behind the scenes. We simply just tell phaser that we want this object to have an image and Phaser will draw it for us. Same goes for physics. In fact, lets try drawing something!
 
 
-In order to draw something we first need to load whatever image we want to draw. Lets start by loading and drawing the background image for our game. You can find the background image and all the other assets for our game over at [github](TODO).
+In order to draw something we first need to load whatever image we want to draw. Let's start by loading and drawing the background image for our game. You can find the background image and all the other assets for our game over at [github](TODO).
 Download the entire assets folder and put it in your working directory. Now we can start loading stuff like so
 
 ```
@@ -166,7 +166,7 @@ The first two arguments correspond to where in the world we want to place the im
 
 
 Oh, I almost forgot, we have tell phaser to create the game with our config object!
-After youve declared the config object, add the following line:
+After you've declared the config object, add the following line:
 
 ``var game = new Phaser.Game(config);``
 
@@ -174,7 +174,7 @@ In reality we could've just supplied all the config data to this constructor fun
 
 
 
-Now were done! If you start the http server in your working directory you should [see something like this](TODO)!
+Now we're done! If you start the http server in your working directory you should [see something like this](TODO)!
 
 Congratulations, you've finally set up Phaser properly and drawn something to the screen! In the next chapter we'll make sure you're able to run around in this wonderfully empty world you've made!
 
