@@ -16,4 +16,4 @@ http://localhost:[port]
 
 if you used a specific port
 
-Send a posix exit signal with ctrl+c to stop the server
+Send a SIGINT exit signal with ctrl+c to stop the server
