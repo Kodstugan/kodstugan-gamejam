@@ -51,8 +51,8 @@ function Player(game, x, y){
     var down = game.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     var right = game.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 
-    var speed = 250;
-    this.sprite.setMaxVelocity(250, 600)
+    var speed = 225;
+    this.sprite.setMaxVelocity(300, 600)
 
     this.update = function(){
 
@@ -64,7 +64,7 @@ function Player(game, x, y){
 
             if(up.isDown || space.isDown){
                 //Since "down" is positive Y in phaser, up is negative, wich is why we subtract speed from velocity in the Y-axis
-                this.sprite.setVelocityY(-330);
+                this.sprite.setVelocityY(-300);
             }
 
         }
