@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" class="A4">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Kodstugan</title>
+    <link href="https://fonts.googleapis.com/css?family=Fugaz+One|Raleway:400,600" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://vuejs.org/js/vue.js"></script>
+    <script type="text/javascript" src="docs.js"></script>
+    <script src="script.js" defer></script>
+  </head>
+
+  <body class="infographic">
+    <header id="header">
+      <h1 id="title">ROBOWARS MANUAL</h1>
+    </header>
+    <main>
+      <section id="page1">
+        <section class="row">
+          <div class="col">
+            <div class="paragraph-l">
+              <h2>Robocodes Värld</h2>
+              <p>
+                Vi kommer att köra på en arena som är 1000x1000 pixlar stor. Detta kan ni använda när ni simulerar en match med eran robot. 
+                <br><br>
+                För att ändra size välj (Battle/New/Rules/Predefined Size/ 1000*1000) i robocode.
+                <br><br>
+                Koordinatsystemet utgår ifrån kartesiska koordinater där (0,0) är i vänstra nedre hörnet. Robocodes rotationsriktningssystem är i grader, och 0 grader “pekar” i nordlig riktning geometriskt. Se bilden.
+                <br><br>
+                Tidsenheten i robocode mäts i “ticks”. Hastigheter mäts således också i pixlar per ticks. Maxhastigheten är 8 pixlar per tick och en robot som rör sig accelerar med 1 pixel per tick. Robotar de-accelererar automatiskt med 2px per tick.
+Robotar svänger i en hastighet på (10 - 0.75 * abs(velocity)) grader per tick. Alltså kommer er robot svänga långsamare ju snabbare den rör sig. Kanonen kan rotera 20 grader/tick och radaren kan rotera 45 grader/tick.
+              </p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="img-background paragraph-r">
+              <img src="coords.gif" id="coord-img">
+            </div>
+          </div>
+        </section>
+        <hr>
+        <section class="row">
+          <div class="col">
+            <div class="paragraph-l">
+              <h2>Energy, liv och död</h2>
+              <p>
+                Varje robot börjar med samma förutsättningar vilket innebär en energimätare på 100 poäng. Så länge din robot har energi är du kvar i spelet. Energi används för att skjuta kulor mot robotar och om man träffar en robot får man tillbaka energi. Men om du kör in i en vägg, en annan robot eller blir träffad av ett skott förlorar du energi.
+              <br>
+              <b>Viktigt!</b>
+              En robot kan avfyra ett skott med 0.1 - 3 energi. Om skottet träffar beräknas skadan enligt: <br><br>
+              <b>4 * bullet energy + 2 * max(bullet energy - 1, 0)</b> <br><br>
+              Vid träff <b>får du får tillbaka energi</b> motsvarande <b>3 * bullet energy</b> men om du missar förlorar du allt!
+              Det finns inget sätt att få tillbaka energi förutom att träffa andra robotar, men gå inte runt och skjut hela tiden för:
+              <br> <br>
+              <b>Robotens kanon kan överhetta!</b>
+              <br> <br>
+              I början av rundan börjar alla vapen heta. Varje gång en robot skjuter ökar värmen med (1.0 + bullet energy / 5 )). kanonen kyls ned med 0.1 värme enheter varje tick. Alltså, om en robot skjuter med en kula laddad med 3 energy kan den bara skjuta var 16nde tick!
+              <b>En robot kan inte skjuta när dess kanon är överhettad!</b>
+              </p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="paragraph-r">
+              <h2>Poäng</h2>
+              <p>
+                <b>Poängsystemet:</b> <br>
+                Den här tävlingen går ut på att få högst totalpoäng. Den totala poängen ges av dessa regler:
+
+              </p>
+              <ul>
+                <li>
+                  <b>Survival score</b> <br>
+                  Varje robot som lever får 50 poäng när en annan robot dör. Om du är sist kvar får du ytterligare 10 poäng för varje robot som dött under rundan.
+                </li>
+                <li>
+                  <p>
+                    <b>Bullet damage</b> <br>
+                    Robots får 1 poäng för varje skada de gör på en annan robot genom att skjuta. Om du dödar en annan robot med projektil får du ytterligare 20% av skadan du gjort på roboten som poäng
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <b>Ram Damage</b> <br>
+                    Robotar får 2 poäng för varje skada de gör genom att krocka in i en  motståndare. Dödar du en annan robot genom att krocka in i den får du ytterligare 30% av skadan du gjort på roboten som poäng
+                  </p>
+                </li>
+              </ul>
+              <p>
+                Alla kommer möta alla i matcher där 5 robotar samtidigt tävlar mot varandra. Det kommer spelas 10 matcher totalt med 10 rundor/match för att minska slumpen. För varje match kommer vi förhoppningsvis visa 1 runda men alla 10 rundor kommer simuleras och poängen läggs ihop till ett genomsnitt. De 3 lagen med högst genomsnitt kommer att vinna tävlingen. (och mötas en extra gång för skojs skull? Eller ska vi ta 5 bästa och köra igen för att ta fram 3 bästa?)
+              </p>
+            </div>
+          </div>
+        </section>
+      </section>
+      <hr>
+      <section id="page2">
+        <div id="docs">
+          <section class="grid">       
+            <div class="api-ref" v-for="docs in documentation">
+              <table>
+                <tr>
+                  <th><h2>{{docs.name}}</h2></th>
+                  <th></th>
+                </tr>
+                <tr v-for="(sig, index) in docs.api" :class="{'code-ref-item': index % 2 === 0, 'code-ref-item-alt': index % 2 !== 0 }">
+                  <td>
+                    <div>
+                      <code class="code-ref-func">
+                        
+                        <span class="code-type">{{sig.return}}</span>
+                        <span class="code-sig">{{sig.name}}</span>(
+                        <span v-for="(v, k, i) in sig.params">
+                          <span class="code-type">{{k}}</span> {{v}}<span v-if="i+1 < sig.params.length">, </span>
+                        </span>)
+                        
+                      </code>
+                    </div>
+                  </td>
+                  <td>
+                    <p>
+                        {{sig.desc}}
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </section>
+        </div>
+      </section>
+      <section id="page3">
+        <section class="row">
+          <div class="col">
+            <div class="paragraph-l">
+              <h2>Tips</h2>
+              <p>
+                Undvik mitten av planen i början av spelet, annars riskerar ni att bli pepprade från alla håll!<br><br>
+
+                Formulera en plan för hur ni ska bygga den bästa roboten innan ni börjar programmera och se till att ni har läst API:ett så ni vet vad ni har för verktyg! <br><br>
+                
+                Börja med simpla implementationer och jobbar er framåt. <br><br>
+
+                Håll koll på tiden!
+
+              </p>
+              
+            </div>
+          </div>
+          <div class="col">
+            <div class="paragraph-r">
+              
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,170 @@
+
+@font-face {
+font-family: 'FixedsysExcelsior301Regular';
+src: url('fsex300-webfont.eot');
+src: url('fsex300-webfont.eot?#iefix') format('embedded-opentype'),
+     url('fsex300-webfont.woff') format('woff'),
+     url('fsex300-webfont.ttf') format('truetype'),
+     url('fsex300-webfont.svg#FixedsysExcelsior301Regular') format('svg');
+font-weight: normal;
+font-style: normal;
+-webkit-font-smoothing:aliased;
+font-smooth:never;
+}
+
+html {
+    font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
+main {
+    width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#header{
+    background-image: url("logo.png");
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    text-align: center;
+    line-height: 300px;
+    font-size: 36px;
+
+    border-bottom: inset 10px;
+}
+
+#title {
+    font-family: FixedsysExcelsior301Regular, Fallback, monospace;
+    margin: auto;
+    
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+}
+
+.col{
+    flex: 1
+}
+
+.grid {
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.api-ref {
+    margin: 10px;
+}
+
+.grid td {
+    padding: 15px;
+    width: 50%;
+}
+
+.grid table {
+    width: 100%;
+}
+.grid p {
+    margin: 0;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+hr {
+    display: block;
+    margin-top: 2em;
+    margin-bottom: 2em;
+
+    border: 5px solid white;
+    max-width: 100%;
+}
+
+h2 {
+    text-align: center;
+}
+
+#coord-img {
+    max-height:100%;
+    max-width:100%;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+
+}
+
+.paragraph-l {
+    margin-right: 20px;
+}
+
+.paragraph-r{
+    margin-left: 20px;
+}
+
+.code-ref-func {
+    font-size: 1.2em;
+}
+
+.code-ref-item {
+    width: 100%;
+    background-color: lightgrey;
+    color: black;
+    padding: 10px;
+}
+
+.code-ref-item-alt {
+    width: 100%;
+    background-color: silver;
+    color: black;
+    padding: 10px;
+}
+.code-type {
+    color: steelblue;
+    font-weight: 525;
+}
+.code-sig {
+}
+
+.infographic{
+	  height: 100%;
+    background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+    background-repeat:     no-repeat;
+    background-attachment: fixed;
+    background-position:   center top;
+    color: white;
+}
+
+.A4 {
+    height: 100%;
+    width: 100%;
+}
+
+
+@page {
+  size: A4-landscape;
+  margin: 0;
+}
+@media print {
+  html, body {
+	height: 100%;
+	width: 100%;
+  }
+  main {
+      width: 90%;
+  }
+  .inforgraphic {
+      overflow: hidden;
+  }
+}
